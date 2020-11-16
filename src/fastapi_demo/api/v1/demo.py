@@ -10,8 +10,10 @@ router = APIRouter()
 from fastapi_demo.items.demo_items import Item
 
 from fastapi_demo.tasks.task import process_item
+from fastapi_demo.core.celery_app import celery_app
 
 @router.post("/items")
 async def add_item(item: Item):
-  print(33333333333)
+  process_item.delay(1,2,3.33)
+
   return {"message": "Item received"}
